@@ -1,0 +1,104 @@
+<div class="row" style="padding: 20px">
+<div class="col-md-12">
+    <div class="form-group row">
+        <label for="scheduled" class="col-sm-9 col-form-label text-muted">Number of Scheduled Vaccination for The Day: </label>
+        <div class="col-sm-3">
+            <p id="scheduled" style="color: darkgoldenrod;font-weight: bold">{{Report.report[0].dayschedule|number}}</p>
+        </div>
+    </div>
+</div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="vmorning" class="col-sm-9 col-form-label text-muted">Number of Vaccinated Children (Morning): </label>
+            <div class="col-sm-3">
+                <p id="vmorning">{{Report.report[0].vaccinated[0].morning|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="vafternoon" class="col-sm-9 col-form-label text-muted">Number of Vaccinated Children (Afternoon): </label>
+            <div class="col-sm-3">
+                <p id="vafternoon">{{Report.report[0].vaccinated[0].afternoon|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="vtotal" class="col-sm-9 col-form-label text-muted">Total Number of Vaccinated Children: </label>
+            <div class="col-sm-3">
+                <p id="vtotal" style="color: green;font-weight: bold">{{setTotal(Report.report[0].vaccinated[0].morning,
+                    Report.report[0].vaccinated[0].afternoon)|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="wmorning" class="col-sm-9 col-form-label text-muted">Number of Available workers (Morning): </label>
+            <div class="col-sm-3">
+                <p id="wmorning">{{Report.report[0].availableworkers[0].morning|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="wafternoon" class="col-sm-9 col-form-label text-muted">Number of Available workers (Afternoon): </label>
+            <div class="col-sm-3">
+                <p id="wafternoon">{{Report.report[0].availableworkers[0].afternoon|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="wtotal" class="col-sm-9 col-form-label text-muted">Total Number of Available Workers: </label>
+            <div class="col-sm-3">
+                <p id="wtotal" style="color: #0062cc;font-weight: bold">{{setTotal(Report.report[0].availableworkers[0].morning,
+                    Report.report[0].availableworkers[0].afternoon)|number}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="wages" class="col-sm-9 col-form-label text-muted">Total Paid Wages: </label>
+            <div class="col-sm-3">
+                <p id="wages" style="color: red;font-weight: bold">{{setWages(Report.report[0].vaccinated[0].morning,
+                    Report.report[0].vaccinated[0].afternoon)|currency:'$'}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="achievement" class="col-sm-12 col-form-label text-success">Achievements: </label>
+            <div class="col-sm-12">
+                <pre style="font-size: 16px;font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;text-transform: capitalize"
+                     id="achievement" class="text-muted">{{Report.report[0].achievement}}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="challenges" class="col-sm-12 col-form-label text-danger ">Challenges: </label>
+            <div class="col-sm-12">
+                <pre style="font-size: 16px;font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;text-transform: capitalize"
+                     id="challenges" class="text-muted">{{Report.report[0].challenges}}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="impact" class="col-sm-12 col-form-label text-info">Impact: </label>
+            <div class="col-sm-12">
+                <pre style="font-size: 16px;font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;text-transform: capitalize"
+                     id="impact" class="text-muted">{{Report.report[0].impact}}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="impact" class="col-sm-12 col-form-label text-warning">Image From The Event: </label>
+            <div class="col-sm-12">
+                <img src="/images/{{Report.report[0].imagefile}}" alt="Vaccination Image" style="height: 400px;width: 600px">
+            </div>
+        </div>
+    </div>
+</div>

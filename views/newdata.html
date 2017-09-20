@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="healthApp" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccination Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Allerta" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Allan" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="container-fluid" ng-controller="healthController"  >
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark " style="background-color: black;" >
+        <a class="navbar-brand abs" href="/" style="font-family: 'Lobster', Georgia, Times, serif;font-size: 25px">
+            Health Monitoring Service
+            <span class="sr-only">(current)</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto" style="font-size: small; font-family: 'Raleway', Helvetica, Arial, sans-serif;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">LOG OUT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section id="tab">
+        <div class="row no-gutters" >
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="sidebar">
+                            <h3><i class="fa fa-dashboard"></i> &nbsp;DASHBOARD</h3>
+                            <div class="checklist categories">
+                                <ul ng-repeat="menu in Menus">
+                                    <li ><a href="/{{menu.title}}"><i class="fa fa-{{menu.icon}}"></i>{{menu.title}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10" style="padding: 30px;height: 600px; overflow-y: scroll;">
+                <h4 id="reporthd" class="text-center">VACCINATION REPORT SHEET</h4>
+                <div class="row justify-content-center" >
+                    <div class="col-md-8" id="report">
+                        <form method="post" enctype="multipart/form-data" action="/newdata/add">
+                            <div class="form-row">
+                                <div class="form-group col-sm-12 form-row">
+                                    <label for="projectday" class="col-form-label">Project Day</label>
+                                    <select class="custom-select " id="projectday" name="projectday" >
+                                        <option selected>Project Day...</option>
+                                        <option value="{{day}}" ng-repeat="day in Days">{{day}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12 ">
+                                    <label for="schedule" class="col-form-label">Number of Children Scheduled For Vaccination</label>
+                                    <input type="number" class="form-control" id="schedule" name="schedule" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                    <label for="morning" class="col-form-label">Number of Vaccinated Children (Morning)</label>
+                                    <input type="number" class="form-control" id="morning" name="morning" ng-model="morning" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="afternoon" class="col-form-label">Number of Vaccinated Children (Afternoon)</label>
+                                    <input type="number" class="form-control" id="afternoon" name="afternoon" ng-model="afternoon" required>
+                                </div>
+                            </div>
+                                <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="wmorning" class="col-form-label">Available Workers (Morning)</label>
+                                    <input type="number" class="form-control" id="wmorning" name="wmorning" placeholder="50" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="wafternoon" class="col-form-label">Available Workers (Afternoon)</label>
+                                    <input type="number" class="form-control" id="wafternoon" name="wafternoon" placeholder="50" required>
+                                </div>
+                                  <!--  <div class="form-group col-sm-4">
+                                        <label for="wages" class="col-form-label">Wages Paid (For all workers)</label>
+                                        <input type="text" class="form-control" id="wages" name="wages"
+                                               ng-model="wages" ng-value="{{setWages(morning,afternoon)|currency:'$'}}"
+                                               placeholder="{{setWages(morning,afternoon)|currency:'$'}}" disabled>
+                                    </div>-->
+                                </div>
+                           <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                    <label for="achievement" class="col-form-label">Achievements</label>
+                                <textarea rows="10" class="form-control" id="achievement" name="achievement" required></textarea>
+                            </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="challenges" class="col-form-label">Challenges</label>
+                                    <textarea rows="10" class="form-control" id="challenges" name="challenges" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="impact" class="col-form-label">Impact</label>
+                                    <textarea rows="10" class="form-control" id="impact" name="impact" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                    <label for="picture" class="col-form-label">Add Picture</label>
+                                    <input type="file" class="form-control" id="picture" name="picture">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                            <div class="form-group ">
+                                <div class="col-sm-10">
+                                    <p><b><%= errmsg %></b></p>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-4">
+                                    <button type="submit" class="btn form-control"
+                                            style="background-color: rgb(235, 25, 163);
+                                    border-color: rgb(235, 25, 163);color: white">Add Report
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/angular.min.js"> </script>
+<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
+<script src="/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+<script src="/static/js/health_app.js"> </script>
+<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>
