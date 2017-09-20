@@ -2,7 +2,6 @@ var crypto = require('crypto');
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
-var nl2br = require('nl2br');
 var mongoose = require('mongoose'),
     Workers = mongoose.model('Worker'),
     Reports = mongoose.model('Report'),
