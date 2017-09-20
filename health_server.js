@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 var con = mongoose.connect('mongodb://127.0.0.1/healthdb',
     {useMongoClient:true});
 var expressSession = require('express-session');
