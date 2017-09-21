@@ -26,4 +26,4 @@ app.use(expressSession({
     })
 }));
 require('./health_routes') (app);
-app.listen(3093);
+app.listen(process.env.PORT || 3093);
