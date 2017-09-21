@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise;
-var con = mongoose.connect('mongodb://healthuser:health@ds141534.mlab.com:41534/healthdb',
+var con = mongoose.connect('mongodb://127.0.0.1/healthdb',
     {useMongoClient:true});
 var expressSession = require('express-session');
 var mongoStore = require('connect-mongo') ({session:expressSession});
@@ -21,7 +21,7 @@ app.use(expressSession({
     resave: false,
     cookie: {maxAge: 60*60*1000},
     store: new mongoStore({
-        url: 'mongodb://healthuser:health@ds141534.mlab.com:41534/healthdb',
+        url: 'mongodb://127.0.0.1/healthdb',
         collection: 'sessions'
     })
 }));
